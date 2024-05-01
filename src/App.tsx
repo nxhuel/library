@@ -15,7 +15,7 @@ function App() {
     <>
       <div className="flex flex-row bg-[#10141F]">
         <Navbar />
-        <div className="flex flex-col w-full pt-12 pl-12 pr-12">
+        <div className="flex flex-col w-full pt-12 pr-8">
           <Search setResult={setResult} />
           <FilterBook result={result} />
           <Title title="Trending" />

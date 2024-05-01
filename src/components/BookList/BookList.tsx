@@ -21,14 +21,14 @@ function BookList() {
   }, []);
 
   return (
-    <div className=" w-full grid grid-cols-5 gap-8 pb-8">
+    <div className=" w-full grid grid-cols-2 md:grid-cols-5 gap-4 pb-8">
       {books.map((book) => (
         <div key={book.id} className="relative">
           <div>
             <img
               src={book.image_url}
               alt={book.title}
-              className="h-96 w-full "
+              className="h-60 md:h-96 w-full "
             />
             <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 cursor-pointer"></div>
           </div>

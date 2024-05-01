@@ -12,7 +12,7 @@ function FilterBook({ result }: FilterBookProps) {
       {result.length > 0 && (
         <>
           <Title title="Search Results" />
-          <div className="grid grid-cols-5 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             {result.map((book, id) => {
               return (
                 <div key={id} className="relative">
@@ -20,7 +20,7 @@ function FilterBook({ result }: FilterBookProps) {
                     <img
                       src={book.image_url}
                       alt={book.title}
-                      className="h-96 w-full"
+                      className="h-60 md:h-96 w-full"
                     />
                     <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 cursor-pointer"></div>
                   </div>

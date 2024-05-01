@@ -19,11 +19,11 @@ function TrendBookList() {
   }, []);
 
   return (
-    <div className="flex items-center gap-8 ">
+    <div className="flex flex-col md:flex-row items-center gap-8 ">
       {books.map((book) => (
         <div key={book.id} className="relative">
           <div className="relative">
-            <img src={book.image_url} alt={book.title} className="h-96 w-full" />
+            <img src={book.image_url} alt={book.title} className=" h-72 md:h-96 w-full" />
             <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
           </div>
           <div className="absolute text-white top-4 right-2 font-bold cursor-pointer hover:text-yellow-200">
