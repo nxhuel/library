@@ -33,12 +33,15 @@ function Search({ setResult }: SearchProps) {
 
   return (
     <div>
-      <SearchIcon fontSize="medium" className="text-white cursor-pointer " />
+      <SearchIcon
+        fontSize="medium"
+        className="text-[#1C2022] dark:text-white cursor-pointer "
+      />
       <span className="pl-4">
         <input
           type="search"
           placeholder="Search for Books"
-          className="text-white w-[80%] h-10 pl-4 outline-none font-mono bg-transparent"
+          className="text-[#1C2022] dark:text-white w-[80%] h-10 pl-4 outline-none font-mono bg-transparent"
           value={input}
           onChange={(e) => handleChange(e.target.value)}
         />

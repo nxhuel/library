@@ -13,7 +13,7 @@ function App() {
   const [result, setResult] = useState<Book[]>([]);
   return (
     <>
-      <div className="flex flex-row bg-[#10141F]">
+      <div className="flex flex-row bg-[#F0F0F0] dark:bg-[#10141F]">
         <Navbar />
         <div className="flex flex-col w-full pt-12 pr-8">
           <Search setResult={setResult} />
