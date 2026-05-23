@@ -1,6 +1,6 @@
-export * from "./Navbar";
-export * from "./Search";
-export * from "./Title";
-export * from "./TrendBookList";
-export * from "./BookList";
-export * from "./FilterBook";
+export { default as Navbar } from "./Navbar/Navbar";
+export { default as Search } from "./Search/Search";
+export { default as BookCard } from "./BookCard";
+export { default as LoginForm } from "./LoginForm";
+export { default as RegisterForm } from "./RegisterForm";
+export { default as FilterBook } from "./FilterBook/FilterBook";

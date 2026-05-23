@@ -1,11 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-family: sans-serif;
+:root {
+  --primary: #FF6303; 
+  --primary-hover: #FF4500;
+  --bg-light: #FFFFFF;
+  --text-light: #111518;
+  --card-light: #F6F7F8;
+  --accent: #FFB90B;
+}
+
+.dark {
+  --bg-dark: #0E1113;
+  --primary: #E13E02;
+  --accent: #FFB90B;
+  --text-dark: #EEF1F3;
+  --card-dark: #1A1A1B;
+  --border-dark: #343536;
+}
+
+@layer base {
+  body {
+    @apply antialiased transition-colors duration-300;
+    font-family: 'IBM Plex Sans', sans-serif;
+    @apply bg-[var(--bg-light)] text-[var(--text-light)] dark:bg-[var(--bg-dark)] dark:text-[var(--text-dark)];
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-[var(--card-light)] dark:bg-[var(--card-dark)] border border-gray-200 dark:border-[var(--border-dark)] shadow-sm rounded-md;
+  }
+
+  .premium-button {
+    @apply px-6 py-1.5 rounded-full font-bold transition-all duration-200 
+           active:scale-95 bg-[var(--primary)] text-white hover:opacity-90;
+  }
+
+  .nav-link {
+    @apply relative py-2 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md px-3;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 rounded-md border border-gray-200 dark:border-[var(--border-dark)] 
+           bg-gray-50 dark:bg-[#272729]
+           focus:ring-1 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-all;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-700 rounded-full hover:bg-gray-400 dark:hover:bg-gray-600;
 }

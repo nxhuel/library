@@ -1,47 +1,33 @@
-import { Book } from "../../services";
-import GradeIcon from "@mui/icons-material/Grade";
-import { Title } from "../Title";
+import { BookResponseDTO } from "../../api/types/book.types";
 
 interface FilterBookProps {
-  result: Book[];
+  allBooks: BookResponseDTO[];
+  onFilter: (results: BookResponseDTO[]) => void;
 }
 
-function FilterBook({ result }: FilterBookProps) {
+function FilterBook({ allBooks, onFilter }: FilterBookProps) {
+  const genres = Array.from(new Set(allBooks.map(b => b.gender)));
+
   return (
-    <>
-      {result.length > 0 && (
-        <>
-          <Title title="Search Results" />
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-            {result.map((book, id) => {
-              return (
-                <div key={id} className="relative">
-                  <div>
-                    <img
-                      src={book.image_url}
-                      alt={book.title}
-                      className="h-60 md:h-96 w-full"
-                    />
-                    <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 cursor-pointer"></div>
-                  </div>
-                  <div className="absolute text-white top-4 right-2 font-bold cursor-pointer hover:text-yellow-200">
-                    <GradeIcon />
-                  </div>
-                  <div className="absolute text-white bottom-4 left-2">
-                    <p>{book.authors}</p>
-                    <h1 className="font-bold">{book.title}</h1>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </>
-      )}
-      {result.length === 0 && (
-        <></>
-      )}
-    </>
+    <div className="flex gap-2 overflow-x-auto pb-2 w-full md:w-auto">
+      <button 
+        onClick={() => onFilter(allBooks)}
+        className="premium-button text-xs py-2 px-4 bg-white/50 dark:bg-slate-800/50 text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition-all whitespace-nowrap glass-card"
+      >
+        All Genres
+      </button>
+      {genres.map(genre => (
+        <button 
+          key={genre}
+          onClick={() => onFilter(allBooks.filter(b => b.gender === genre))}
+          className="premium-button text-xs py-2 px-4 bg-white/50 dark:bg-slate-800/50 text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition-all whitespace-nowrap glass-card"
+        >
+          {genre}
+        </button>
+      ))}
+    </div>
   );
 }
 
 export default FilterBook;
+

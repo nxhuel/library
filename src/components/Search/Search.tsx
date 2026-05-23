@@ -1,53 +1,39 @@
 import SearchIcon from "@mui/icons-material/Search";
-import "./style/index.css";
-import { useState } from "react";
-import { API_URL, Book } from "../../services";
+import { useState, useEffect } from "react";
+import { BookResponseDTO } from "../../api/types/book.types";
 
 interface SearchProps {
-  setResult: React.Dispatch<React.SetStateAction<Book[]>>;
+  allBooks: BookResponseDTO[];
+  onSearch: (results: BookResponseDTO[]) => void;
 }
 
-function Search({ setResult }: SearchProps) {
+function Search({ allBooks, onSearch }: SearchProps) {
   const [input, setInput] = useState<string>("");
 
-  const fetchData = (value: string) => {
-    fetch(API_URL)
-      .then((response) => response.json())
-      .then((json: Book[]) => {
-        const result = json.filter((book) => {
-          return (
-            value &&
-            book &&
-            book.title &&
-            book.title.toLowerCase().includes(value.toLowerCase())
-          );
-        });
-        setResult(result);
-      });
-  };
-
-  const handleChange = (value: string) => {
-    setInput(value);
-    fetchData(value);
-  };
+  useEffect(() => {
+    const filtered = allBooks.filter((book) =>
+      book.title.toLowerCase().includes(input.toLowerCase()) ||
+      book.authorName.toLowerCase().includes(input.toLowerCase()) ||
+      book.gender.toLowerCase().includes(input.toLowerCase())
+    );
+    onSearch(filtered);
+  }, [input, allBooks, onSearch]);
 
   return (
-    <div>
-      <SearchIcon
-        fontSize="medium"
-        className="text-[#1C2022] dark:text-white cursor-pointer "
+    <div className="relative group w-full">
+      <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
+        <SearchIcon />
+      </div>
+      <input
+        type="text"
+        placeholder="Search by title, author, or genre..."
+        className="input-field pl-12 h-14 text-lg"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
       />
-      <span className="pl-4">
-        <input
-          type="search"
-          placeholder="Search for Books"
-          className="text-[#1C2022] dark:text-white w-[80%] h-10 pl-4 outline-none font-mono bg-transparent"
-          value={input}
-          onChange={(e) => handleChange(e.target.value)}
-        />
-      </span>
     </div>
   );
 }
 
 export default Search;
+
